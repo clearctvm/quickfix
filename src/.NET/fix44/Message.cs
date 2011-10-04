@@ -1,6 +1,8 @@
 namespace QuickFix44
 {
-  public class Header : QuickFix.Message.Header
+	using QuickFix;
+
+	public class Header : QuickFix.Message.Header
   {
     Header(QuickFix.Message message) : base(message) {}
 
@@ -415,6 +417,11 @@ namespace QuickFix44
 
   public class Message : QuickFix.Message
   {
+	  public Message(string str, DataDictionary dd) : base(str, dd)
+	  {
+	  	
+	  }
+
     public Message() : base(new QuickFix.BeginString("FIX.4.4"))
     {
       m_header = new Header(this);

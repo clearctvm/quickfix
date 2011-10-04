@@ -4077,6 +4077,7 @@ namespace QuickFix
     static const String* AllocationInstructionAck = "P";
     static const String* MarketDataRequest = "V";
     static const String* MarketDataRequestReject = "Y";
+	static const String* ApplicationRawDataReporting = "URDR";
     MsgType() : StringField(35) {}
     MsgType(String* data) : StringField(35, data) {}
   };
@@ -11032,6 +11033,14 @@ namespace QuickFix
     RawDataLength(int data) : IntField(95, data) {}
   };
 
+  public __gc class RawDataOffset : public IntField
+  {
+  public:
+    static const int FIELD = 10055;
+    RawDataOffset() : IntField(10055) {}
+    RawDataOffset(int data) : IntField(10055, data) {}
+  };
+
   public __gc class UnderlyingSecurityType : public StringField
   {
   public:
@@ -16089,6 +16098,14 @@ namespace QuickFix
     static const int FIELD = 1351;
     NoApplIDs() : IntField(1351) {}
     NoApplIDs(int data) : IntField(1351, data) {}
+  };
+
+  public __gc class NoApplSeqNums : public IntField
+  {
+  public:
+    static const int FIELD = 10054;
+    NoApplSeqNums() : IntField(10054) {}
+    NoApplSeqNums(int data) : IntField(10054, data) {}
   };
 
   public __gc class DerivativeContractSettlMonth : public StringField

@@ -79,7 +79,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
     <NoWarn>
@@ -89,7 +89,7 @@
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningLevel>4</WarningLevel>
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
@@ -665,6 +665,10 @@
     <Compile Include="fix44\AllocationReportAck.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="fix44\ApplicationMessageReport.cs" />
+    <Compile Include="fix44\ApplicationMessageRequest.cs" />
+    <Compile Include="fix44\ApplicationMessageRequestAck.cs" />
+    <Compile Include="fix44\ApplicationRawDataReporting.cs" />
     <Compile Include="fix44\AssignmentReport.cs">
       <SubType>Code</SubType>
     </Compile>

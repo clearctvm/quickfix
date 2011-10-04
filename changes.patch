@@ -1,0 +1,287 @@
+Index: src/.NET/Fields.h
+===================================================================
+--- src/.NET/Fields.h	(revision 2269)
++++ src/.NET/Fields.h	(working copy)
+@@ -4077,6 +4077,7 @@
+     static const String* AllocationInstructionAck = "P";
+     static const String* MarketDataRequest = "V";
+     static const String* MarketDataRequestReject = "Y";
++	static const String* ApplicationRawDataReporting = "URDR";
+     MsgType() : StringField(35) {}
+     MsgType(String* data) : StringField(35, data) {}
+   };
+@@ -11032,6 +11033,14 @@
+     RawDataLength(int data) : IntField(95, data) {}
+   };
+ 
++  public __gc class RawDataOffset : public IntField
++  {
++  public:
++    static const int FIELD = 10055;
++    RawDataOffset() : IntField(10055) {}
++    RawDataOffset(int data) : IntField(10055, data) {}
++  };
++
+   public __gc class UnderlyingSecurityType : public StringField
+   {
+   public:
+@@ -16091,6 +16100,14 @@
+     NoApplIDs(int data) : IntField(1351, data) {}
+   };
+ 
++  public __gc class NoApplSeqNums : public IntField
++  {
++  public:
++    static const int FIELD = 10054;
++    NoApplSeqNums() : IntField(10054) {}
++    NoApplSeqNums(int data) : IntField(10054, data) {}
++  };
++
+   public __gc class DerivativeContractSettlMonth : public StringField
+   {
+   public:
+Index: src/.NET/fix44/ApplicationMessageReport.cs
+===================================================================
+--- src/.NET/fix44/ApplicationMessageReport.cs	(revision 2269)
++++ src/.NET/fix44/ApplicationMessageReport.cs	(working copy)
+@@ -1,4 +1,4 @@
+-namespace QuickFix50Sp2
++namespace QuickFix44
+ {
+ 
+   public class ApplicationMessageReport : Message
+Index: src/.NET/fix44/ApplicationMessageRequest.cs
+===================================================================
+--- src/.NET/fix44/ApplicationMessageRequest.cs	(revision 2269)
++++ src/.NET/fix44/ApplicationMessageRequest.cs	(working copy)
+@@ -1,4 +1,4 @@
+-namespace QuickFix50Sp2
++namespace QuickFix44
+ {
+ 
+   public class ApplicationMessageRequest : Message
+Index: src/.NET/fix44/ApplicationMessageRequestAck.cs
+===================================================================
+--- src/.NET/fix44/ApplicationMessageRequestAck.cs	(revision 2269)
++++ src/.NET/fix44/ApplicationMessageRequestAck.cs	(working copy)
+@@ -1,4 +1,4 @@
+-namespace QuickFix50Sp2
++namespace QuickFix44
+ {
+ 
+   public class ApplicationMessageRequestAck : Message
+Index: src/.NET/fix44/ApplicationRawDataReporting.cs
+===================================================================
+--- src/.NET/fix44/ApplicationRawDataReporting.cs	(revision 0)
++++ src/.NET/fix44/ApplicationRawDataReporting.cs	(revision 0)
+@@ -0,0 +1,94 @@
++﻿namespace QuickFix44
++{
++	public class ApplicationRawDataReporting : Message
++	{
++		public ApplicationRawDataReporting() : base(MsgType()) {}
++		static QuickFix.MsgType MsgType() { return new QuickFix.MsgType("URDR"); }
++
++		public QuickFix.ApplReqID getApplReqID()
++		{
++			var value = new QuickFix.ApplReqID();
++			getField(value); 
++			return value;
++		}
++
++		public QuickFix.ApplResponseID getApplResponseID()
++		{
++			var value = new QuickFix.ApplResponseID();
++			getField(value); 
++			return value;
++		}
++
++		public QuickFix.ApplID getApplID()
++		{
++			var value = new QuickFix.ApplID();
++			getField(value); 
++			return value;
++		}
++
++		public QuickFix.RawDataLength getRawDataLength()
++		{
++			var value = new QuickFix.RawDataLength();
++			getField(value); 
++			return value;
++		}
++
++		public QuickFix.RawData getRawData()
++		{
++			var value = new QuickFix.RawData();
++			getField(value); 
++			return value;
++		}
++
++		public QuickFix.TotNumReports getTotNumReports()
++		{
++			var value = new QuickFix.TotNumReports();
++			getField(value); 
++			return value;
++		}
++
++		public QuickFix.NoApplSeqNums getNoApplSeqNums()
++		{
++			var value = new QuickFix.NoApplSeqNums();
++			getField(value); 
++			return value;
++		}
++
++		public class NoApplSeqNums : QuickFix.Group
++		{
++			public NoApplSeqNums() : base(10054, 1181, message_order)
++			{
++			}
++
++			private static int[] message_order = new int[] {1181, 1350, 10055, 95};
++
++			public QuickFix.ApplSeqNum getNoApplSeqNums()
++			{
++				var value = new QuickFix.ApplSeqNum();
++				getField(value); 
++				return value;
++			}
++
++			public QuickFix.ApplLastSeqNum getApplLastSeqNum()
++			{
++				var value = new QuickFix.ApplLastSeqNum();
++				getField(value); 
++				return value;
++			}
++
++			public QuickFix.RawDataOffset getRawDataOffset()
++			{
++				var value = new QuickFix.RawDataOffset();
++				getField(value); 
++				return value;
++			}
++
++			public QuickFix.RawDataLength getRawDataLength()
++			{
++				var value = new QuickFix.RawDataLength();
++				getField(value); 
++				return value;
++			}
++		}
++	}
++}
+\ No newline at end of file
+Index: src/.NET/fix44/ExecutionReport.cs
+===================================================================
+--- src/.NET/fix44/ExecutionReport.cs	(revision 2269)
++++ src/.NET/fix44/ExecutionReport.cs	(working copy)
+@@ -1,9 +1,14 @@
+ namespace QuickFix44
+ {
++	using QuickFix;
+ 
+-  public class ExecutionReport : Message
++	public class ExecutionReport : Message
+   {
+-    public ExecutionReport() : base(MsgType()) {}
++  	public ExecutionReport(string str, DataDictionary dd) : base(str, dd)
++  	{
++  	}
++
++  	public ExecutionReport() : base(MsgType()) {}
+     static QuickFix.MsgType MsgType() { return new QuickFix.MsgType("8"); }
+ 
+     public ExecutionReport(
+Index: src/.NET/fix44/Message.cs
+===================================================================
+--- src/.NET/fix44/Message.cs	(revision 2269)
++++ src/.NET/fix44/Message.cs	(working copy)
+@@ -1,6 +1,8 @@
+ namespace QuickFix44
+ {
+-  public class Header : QuickFix.Message.Header
++	using QuickFix;
++
++	public class Header : QuickFix.Message.Header
+   {
+     Header(QuickFix.Message message) : base(message) {}
+ 
+@@ -415,6 +417,11 @@
+ 
+   public class Message : QuickFix.Message
+   {
++	  public Message(string str, DataDictionary dd) : base(str, dd)
++	  {
++	  	
++	  }
++
+     public Message() : base(new QuickFix.BeginString("FIX.4.4"))
+     {
+       m_header = new Header(this);
+Index: src/.NET/FIX44_MessageFactory.cs
+===================================================================
+--- src/.NET/FIX44_MessageFactory.cs	(revision 2269)
++++ src/.NET/FIX44_MessageFactory.cs	(working copy)
+@@ -580,6 +580,30 @@
+       return new QuickFix44.ConfirmationRequest();
+       
+      }
++
++	 if(msgType.Equals("BY")) {
++      
++      return new QuickFix44.ApplicationMessageReport();
++      
++     }
++
++	 if(msgType.Equals("BW")) {
++      
++      return new QuickFix44.ApplicationMessageRequest();
++      
++     }
++
++	 if(msgType.Equals("BX")) {
++      
++      return new QuickFix44.ApplicationMessageRequestAck();
++      
++     }
++
++	 if(msgType.Equals("URDR")) {
++      
++      return new QuickFix44.ApplicationRawDataReporting();
++      
++     }
+    
+     return new QuickFix44.Message();
+     
+Index: src/.NET/quickfix_net_messages_vs10.csproj
+===================================================================
+--- src/.NET/quickfix_net_messages_vs10.csproj	(revision 2269)
++++ src/.NET/quickfix_net_messages_vs10.csproj	(working copy)
+@@ -79,7 +79,7 @@
+     <DefineConstants>TRACE</DefineConstants>
+     <DocumentationFile>
+     </DocumentationFile>
+-    <DebugSymbols>false</DebugSymbols>
++    <DebugSymbols>true</DebugSymbols>
+     <FileAlignment>4096</FileAlignment>
+     <NoStdLib>false</NoStdLib>
+     <NoWarn>
+@@ -89,7 +89,7 @@
+     <RemoveIntegerChecks>false</RemoveIntegerChecks>
+     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+     <WarningLevel>4</WarningLevel>
+-    <DebugType>none</DebugType>
++    <DebugType>pdbonly</DebugType>
+     <ErrorReport>prompt</ErrorReport>
+   </PropertyGroup>
+   <ItemGroup>
+@@ -665,6 +665,10 @@
+     <Compile Include="fix44\AllocationReportAck.cs">
+       <SubType>Code</SubType>
+     </Compile>
++    <Compile Include="fix44\ApplicationMessageReport.cs" />
++    <Compile Include="fix44\ApplicationMessageRequest.cs" />
++    <Compile Include="fix44\ApplicationMessageRequestAck.cs" />
++    <Compile Include="fix44\ApplicationRawDataReporting.cs" />
+     <Compile Include="fix44\AssignmentReport.cs">
+       <SubType>Code</SubType>
+     </Compile>

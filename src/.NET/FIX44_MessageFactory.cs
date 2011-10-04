@@ -580,6 +580,30 @@ namespace QuickFix44
       return new QuickFix44.ConfirmationRequest();
       
      }
+
+	 if(msgType.Equals("BY")) {
+      
+      return new QuickFix44.ApplicationMessageReport();
+      
+     }
+
+	 if(msgType.Equals("BW")) {
+      
+      return new QuickFix44.ApplicationMessageRequest();
+      
+     }
+
+	 if(msgType.Equals("BX")) {
+      
+      return new QuickFix44.ApplicationMessageRequestAck();
+      
+     }
+
+	 if(msgType.Equals("URDR")) {
+      
+      return new QuickFix44.ApplicationRawDataReporting();
+      
+     }
    
     return new QuickFix44.Message();
     
