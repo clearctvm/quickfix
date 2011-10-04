@@ -1,9 +1,14 @@
 namespace QuickFix44
 {
+	using QuickFix;
 
-  public class ExecutionReport : Message
+	public class ExecutionReport : Message
   {
-    public ExecutionReport() : base(MsgType()) {}
+  	public ExecutionReport(string str, DataDictionary dd) : base(str, dd)
+  	{
+  	}
+
+  	public ExecutionReport() : base(MsgType()) {}
     static QuickFix.MsgType MsgType() { return new QuickFix.MsgType("8"); }
 
     public ExecutionReport(
