@@ -1,8 +1,26 @@
 
 _ReSharper.*
+*.user
 *.csproj.user
 *.resharper.user
 *.ReSharper.user
 *.suo
 *.cache
+*.sdf
+*.opensdf
 ~$*
+
+include/
+
+/obj
+/bin
+/debug
+*/obj
+*/bin
+*/debug
+*/*/obj
+*/*/bin
+*/*/debug
+*/*/*/bin
+*/*/*/obj
+*/*/*/debug
