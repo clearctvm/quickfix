@@ -56,13 +56,13 @@
 
 		public class NoApplSeqNums : QuickFix.Group
 		{
+			private static readonly int[] message_order = new [] {1181, 1350, 10055, 95};
+
 			public NoApplSeqNums() : base(10054, 1181, message_order)
 			{
 			}
 
-			private static int[] message_order = new int[] {1181, 1350, 10055, 95};
-
-			public QuickFix.ApplSeqNum getNoApplSeqNums()
+			public QuickFix.ApplSeqNum getApplSeqNum()
 			{
 				var value = new QuickFix.ApplSeqNum();
 				getField(value); 
