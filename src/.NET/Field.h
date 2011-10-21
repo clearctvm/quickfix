@@ -136,14 +136,24 @@ IntField( int field, int value ) : Field( field, __box( value ) ) {}
 
 public __gc class StringField : public Field
 {
+private:
+const char* m_rawData;
+
 public:
 StringField( int field ) : Field( field, new String( "" ) ) {}
 StringField( int field, String* data ) : Field( field, data ) {}
 
   void setValue( String* value )
   { setObject( value ); }
+
   String* getValue()
   { return static_cast < String* > ( getObject() ); }
+
+  void setRawData( const char* value )
+  { this->m_rawData = value; }
+
+  const char* getRawData()
+  { return this->m_rawData; }
 };
 
 public __gc class UtcTimeStampField : public Field

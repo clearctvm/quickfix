@@ -221,7 +221,12 @@ StringField* mapGetField( StringField* field, FIX::FieldMap& map )
 
   try
   {
-    field->setValue( map.getField( field->getField() ).c_str() );
+	if (field->getField() == 96) { //RawData can't be converted to c_str without loosing data in some cases.
+	  field->setRawData( map.getField( field->getField() ).data() );
+	}
+	
+	field->setValue( map.getField( field->getField() ).c_str() );
+
     return field;
   }
   catch ( FIX::FieldNotFound & e )

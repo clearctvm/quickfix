@@ -148,11 +148,20 @@ inline std::ostream& operator <<
  */
 class StringField : public FieldBase
 {
+private:
+const char* m_rawData;
+
 public:
   explicit StringField( int field, const std::string& data )
 : FieldBase( field, data ) {}
   StringField( int field )
 : FieldBase( field, "" ) {}
+
+  void setRawData( const char* value )
+  { this->m_rawData = value; }
+
+  const char* getRawData()
+  { return this->m_rawData; }
 
   void setValue( const std::string& value )
     { setString( value ); }

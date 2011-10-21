@@ -265,7 +265,7 @@ public:
 
   bool isDataField( int field ) const
   {
-    FieldTypes::const_iterator i = m_fieldTypes.find( field );
+	FieldTypes::const_iterator i = m_fieldTypes.find( field );
     return i != m_fieldTypes.end() && i->second == TYPE::Data;
   }
 
