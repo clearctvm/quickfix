@@ -15,12 +15,17 @@ include/
 /obj
 /bin
 /debug
+/release
 */obj
 */bin
 */debug
+*/release
 */*/obj
 */*/bin
 */*/debug
+*/*/release
 */*/*/bin
 */*/*/obj
 */*/*/debug
+*/*/*/release
+/lib
