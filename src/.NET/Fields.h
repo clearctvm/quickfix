@@ -7297,6 +7297,10 @@ namespace QuickFix
     static const int USER_NOT_AUTHORIZED_FOR_APPLICATION = 2;
     static const int APPLICATION_DOES_NOT_EXIST = 0;
     static const int MESSAGES_REQUESTED_ARE_NOT_AVAILABLE = 1;
+	static const int TOP_N_MESSAGES_REQUESTED_NOT_AVAILABLE = 5;
+	static const int BOTTOM_N_MESSAGES_REQUESTED_NOT_AVAILABLE = 6;
+	static const int TOP_N_AND_BOTTOM_N_MESSAGES_REQUESTED_NOT_AVAILABLE = 7;
+
     ApplResponseError() : IntField(1354) {}
     ApplResponseError(int data) : IntField(1354, data) {}
   };
@@ -15796,6 +15800,7 @@ namespace QuickFix
     static const int FIELD = 1426;
     static const int REPORTS_THAT_THE_LAST_MESSAGE_HAS_BEEN_SENT_FOR_THE_APPLIDS_REFER_TO_REFAPPLLASTSEQNUM = 1;
     static const int APPLICATION_MESSAGE_RE_SEND_COMPLETED = 3;
+	static const int APPLICATION_RE_SEND_ERROR = 4;
     static const int RESET_APPLSEQNUM_TO_NEW_VALUE_SPECIFIED_IN_APPLNEWSEQNUM = 0;
     static const int HEARTBEAT_MESSAGE_INDICATING_THAT_APPLICATION_IDENTIFIED_BY_REFAPPLID = 2;
     ApplReportType() : IntField(1426) {}
