@@ -14925,6 +14925,7 @@ namespace QuickFix
   {
   public:
     static const int FIELD = 661;
+	static const int ACCOUNT_CODE_OR_PROPRIETARY = 99;
     AllocAcctIDSource() : IntField(661) {}
     AllocAcctIDSource(int data) : IntField(661, data) {}
   };
