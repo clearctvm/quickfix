@@ -7850,6 +7850,8 @@ namespace QuickFix
   {
   public:
     static const int FIELD = 1348;
+	static const int MAX_EXCEEDED = 4;
+	static const int PREVIOUS_PENDING = 3;
     static const int MESSAGES_NOT_AVAILABLE = 2;
     static const int APPLICATION_DOES_NOT_EXIST = 1;
     static const int REQUEST_SUCCESSFULLY_PROCESSED = 0;
