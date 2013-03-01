@@ -266,6 +266,13 @@ void ThreadedSocketInitiator::getHost( const SessionID& s, const Dictionary& d,
 
   int num = 0;
   SessionToHostNum::iterator i = m_sessionToHostNum.find( s );
+
+  /*std::stringstream ns;
+
+  ns << num;
+
+  std::cout << ("Num: " + ns.str() + ". Map: ") << m_sessionToHostNum[ s ] << std::endl;*/
+
   if ( i != m_sessionToHostNum.end() ) num = i->second;
 
   std::stringstream hostStream;
@@ -276,19 +283,23 @@ void ThreadedSocketInitiator::getHost( const SessionID& s, const Dictionary& d,
   portStream << SOCKET_CONNECT_PORT << num;
   std::string portString = portStream.str();
 
+  //std::cout << ("hostString: " + hostString + ". portString: " + portString) << std::endl;
+
   if( d.has(hostString) && d.has(portString) )
   {
+	m_sessionToHostNum[ s ] = ++num;
+
     address = d.getString( hostString );
     port = ( short ) d.getLong( portString );
   }
   else
   {
-    num = 0;
-    address = d.getString( SOCKET_CONNECT_HOST );
+	num = 0;
+	m_sessionToHostNum[ s ] = 0;
+    
+	address = d.getString( SOCKET_CONNECT_HOST );
     port = ( short ) d.getLong( SOCKET_CONNECT_PORT );
-  }
-
-  m_sessionToHostNum[ s ] = ++num;
+  }  
 
   QF_STACK_POP
 }
