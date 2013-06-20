@@ -9109,6 +9109,7 @@ namespace QuickFix
     static const __wchar_t GOOD_THROUGH_CROSSING = '8';
     static const __wchar_t AT_THE_CLOSE = '7';
     static const __wchar_t AT_THE_OPENING = '2';
+	static const __wchar_t GOOD_FOR_AUCTION = 'A';
     TimeInForce() : CharField(59) {}
     TimeInForce(__wchar_t data) : CharField(59, data) {}
   };

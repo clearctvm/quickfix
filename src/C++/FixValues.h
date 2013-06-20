@@ -1988,6 +1988,7 @@ namespace FIX
   const char MessageEncoding_SHIFT_JIS[] = "SHIFT_JIS";
   const char MessageEncoding_UTF_8[] = "UTF-8";
   const char MessageEncoding_ISO_2022_JP[] = "ISO-2022-JP";
+  const char TimeInForce_GOOD_FOR_AUCTION = 'A';
   const char TimeInForce_GOOD_TILL_CROSSING = '5';
   const char TimeInForce_FILL_OR_KILL = '4';
   const char TimeInForce_GOOD_TILL_DATE = '6';
