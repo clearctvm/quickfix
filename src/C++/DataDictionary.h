@@ -424,8 +424,8 @@ private:
   ( const FieldBase& field, const MsgType& msgType ) const
   throw( TagNotDefinedForMessage )
   {
-    if ( !isMsgField( msgType, field.getField() ) )
-      throw TagNotDefinedForMessage( field.getField() );
+    /*if ( !isMsgField( msgType, field.getField() ) )
+      throw TagNotDefinedForMessage( field.getField() );*/
   }
 
   /// Check if group count matches number of groups in
