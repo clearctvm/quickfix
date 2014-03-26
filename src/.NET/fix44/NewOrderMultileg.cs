@@ -1,9 +1,14 @@
 namespace QuickFix44
 {
-
+    using QuickFix;
   public class NewOrderMultileg : Message
   {
     public NewOrderMultileg() : base(MsgType()) {}
+
+    public NewOrderMultileg(string str, DataDictionary dd)
+        : base(str, dd)
+  	{
+  	}
     static QuickFix.MsgType MsgType() { return new QuickFix.MsgType("AB"); }
 
     public NewOrderMultileg(

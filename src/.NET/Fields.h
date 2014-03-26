@@ -18024,4 +18024,35 @@ namespace QuickFix
     SettlCurrBidFxRate(double data, int decimalPadding) : DoubleField(656, data, decimalPadding) {}
   };
 
+  public __gc class MessageID : public StringField
+  {
+  public:
+    static const int FIELD = 9225;
+    MessageID() : StringField(9225) {}
+    MessageID(String* data) : StringField(9225, data) {}
+  };
+
+  public __gc class XMLContent : public StringField
+  {
+  public:
+    static const int FIELD = 20001;
+    XMLContent() : StringField(20001) {}
+    XMLContent(String* data) : StringField(20001, data) {}
+  };
+
+  public __gc class XMLContentLen : public IntField
+  {
+  public:
+    static const int FIELD = 20002;
+    XMLContentLen() : IntField(20002) {}
+    XMLContentLen(int data) : IntField(20002, data) {}
+  };
+
+  public __gc class ResponseID : public StringField
+  {
+  public:
+    static const int FIELD = 20003;
+    ResponseID() : StringField(20003) {}
+    ResponseID(String* data) : StringField(20003, data) {}
+  };
 }
