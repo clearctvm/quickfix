@@ -3,7 +3,13 @@ namespace QuickFix44
 
   public class OrderCancelRequest : Message
   {
+      public OrderCancelRequest(string str, QuickFix.DataDictionary dd)
+          : base(str, dd)
+  	{
+  	}
+
     public OrderCancelRequest() : base(MsgType()) {}
+
     static QuickFix.MsgType MsgType() { return new QuickFix.MsgType("F"); }
 
     public OrderCancelRequest(
