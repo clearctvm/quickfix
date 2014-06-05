@@ -37,6 +37,8 @@ FileStore::FileStore( std::string path, const SessionID& s )
 {
   file_mkdir( path.c_str() );
 
+  _setmaxstdio(2048);
+
   if ( path.empty() ) path = ".";
   const std::string& begin =
     s.getBeginString().getString();
@@ -116,7 +118,11 @@ void FileStore::open( bool deleteFile )
   if ( !m_sessionFile ) setCreationTime = true;
   else fclose( m_sessionFile );
 
-  m_sessionFile = file_fopen( m_sessionFileName.c_str(), "r+" );
+  /*printf("Opening session file: ");
+  printf( m_sessionFileName.c_str());
+  printf("\r\n");*/
+
+  m_sessionFile = file_fopen( m_sessionFileName.c_str(), "r+, ccs=UTF-8" );
   if ( !m_sessionFile ) m_sessionFile = file_fopen( m_sessionFileName.c_str(), "w+" );
   if ( !m_sessionFile ) throw ConfigError( "Could not open session file" );
   if ( setCreationTime ) setSession();

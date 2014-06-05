@@ -589,7 +589,14 @@ FILE* file_fopen( const char* path, const char* mode )
 
 #if( _MSC_VER >= 1400 )
   FILE* result = 0;
-  fopen_s( &result, path, mode );
+  errno_t err;
+  err = fopen_s( &result, path, mode );
+
+  if( err != 0 && err != 2)
+  {
+	  printf ("Failed to open file. Error: %u \r\n", err);
+  }
+
   return result;
 #else
   return fopen( path, mode );
